@@ -1,0 +1,8 @@
+Financial Analysis
+Total Months86
+Total Amount38382578
+Average-2315.1176470588234
+Greatest Increase: Feb-2012
+1926159
+Greatest Decrease: Sep-2013
+-2196167
