@@ -28,4 +28,26 @@ button.on("click", () => {
     console.log(filterCity);
     var filterData = data.filter(data => data.datetime === inputDate && data.city === inputCity);
     console.log(filterData);
+
+
+tbody.html("");
+
+    let response = {
+        filterData, filterCity, filterDate
+    }
+    if (response.filterData.length !== 0) {
+        populate(filterData);
+    }
+    else if (response.filterData.length === 0 && ((response.filterCity.length !== 0 || response.filterDate.length !== 0))) {
+        populate(filterCity) || populate(filterDate);
+    }
+    else {
+        tbody.append("tr").append("td").text("Nothing found.");
+    }
 })
+
+resetbtn.on("click", () => {
+    tbody.html("");
+    populate(data);
+    console.log("Table reset");
+});
