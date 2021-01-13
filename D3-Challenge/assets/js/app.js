@@ -76,5 +76,33 @@ console.log(healthData)
         .attr("transform", `translate(0, ${height})`)
         .call(bottomAxis);
 
+    //APPEND Y AXIS
+    chartGroup.append("g")
+        .call(leftAxis);
+
+    //APPEND CIRLES
+    var circlesGroup = chartGroup.selectAll("circle")
+        .data(healthData)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xLinearScale(d.healthcare))
+        .attr("cy", d => yLinearScale(d.poverty))
+        .attr("r", 20)
+        .attr("fill", "green")
+        .attr("opacity", ".5")
+        .on("mouseout", function(data, index) {
+            toolTip.hide(data);
+        });
+    
+    var toolTip = d3.tip()
+        .attr("class", "tooltip")
+        .offset([80, -60])
+        .html(function(d) {
+            return (abbr + '%');
+        });
+
+    chartGroup.call(toolTip);
+
+
 
 });
