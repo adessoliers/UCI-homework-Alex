@@ -103,6 +103,40 @@ console.log(healthData)
 
     chartGroup.call(toolTip);
 
+    //UPDATE CIRCLES TO transition to new circles
+    circlesGroup.call(toolTip);
+
+    circlesGroup.on("mouseover", function(healthData) {
+        toolTip.show(healthData);
+    })
+    //onmouseoutevent
+    .on("mouseout", function(healthData, index) {
+        toolTip.hide(healthdata);
+    });
+
+    chartGroup.append("text")
+        .style("font-size", "10px")
+        .selectAll("tspan")
+        .data(healthData)
+        .enter()
+        .append("tspan")
+            .attr("x", function(data) {
+                return xLinearScale(data.healthcare +1.4);
+            })
+            .attr("y", function(data) {
+                return yLinearScale(data.poverty +.2);
+            })
+            .text(function(data) {
+                return data.abbr
+            });
+
+    chartGroup.append("g")
+        .attr("transform", `translate(${width / 1.5}, ${height + margin.top + 40})`)
+        .attr("class", "axisText")
+        .text("In Poverty (%)")
+        .catch(function(error) {
+            console.log(error);
+        });
 
 
 });
